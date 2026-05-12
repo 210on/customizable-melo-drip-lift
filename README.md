@@ -1,8 +1,8 @@
 # Customizable MeloDrip Lift
 
-Parametric OpenSCAD model for a MeloDrip lift/support, with localized stopper tabs instead of a full inner ring.
+Parametric OpenSCAD model for a MeloDrip lift/support.
 
-メロドリップ用リフトをパラメトリックに調整できる OpenSCAD モデルです。内側の落下防止突起は全周リングではなく、干渉を避けやすい部分ストッパー方式にしています。
+メロドリップ用リフトをパラメトリックに調整できる OpenSCAD モデルです。
 
 ## Main model
 
@@ -55,11 +55,3 @@ Parametric OpenSCAD model for a MeloDrip lift/support, with localized stopper ta
 2. カスタマイザまたはソース上のパラメータを調整します。
 3. `F5` でプレビューします。
 4. はまり具合とストッパー位置が問題なければ `F6` でレンダリングして書き出します。
-
-## Notes
-
-- The stopper geometry is intentionally partial, not continuous, to reduce interference with the real MeloDrip body.
-
-## 注意
-
-- ストッパー形状は、実物メロドリップとの干渉を減らすために、連続リングではなく部分的な突起にしています。
