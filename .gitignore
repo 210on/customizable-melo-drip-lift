@@ -1,0 +1,17 @@
+.DS_Store
+
+# OpenSCAD exports
+*.stl
+*.3mf
+*.amf
+*.csg
+*.png
+
+# Nested projects managed in their own repositories
+custom-emoji-studio/
+openscad-customizable-coffee-dripper/
+openscad-hybrid-brewer/
+openscad-paper-filter-cut-jig/
+
+# Local scratch concepts
+dripper_paper_rinse_support.scad
