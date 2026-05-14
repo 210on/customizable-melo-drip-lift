@@ -1,57 +1,92 @@
 # Customizable MeloDrip Lift
 
-Parametric OpenSCAD model for a MeloDrip lift/support.
+Parametric OpenSCAD model for a MeloDrip lift/support, designed to avoid interference by using localized stopper tabs instead of a full inner ring.
 
-メロドリップ用リフトをパラメトリックに調整できる OpenSCAD モデルです。
+メロドリップ用リフトをパラメトリックに調整できる OpenSCAD モデルです。内側の落下防止形状は全周リングではなく、干渉を避けやすい部分ストッパー方式にしています。
 
-## Main model
+## Current spec
+
+- Target MeloDrip body:
+  - Bottom diameter `53 mm`
+  - Top diameter `55 mm`
+  - Height `14 mm`
+- Support strategy:
+  - Inner support wall
+  - Radial bridge spokes
+  - Outer support ring
+  - Localized anti-drop stopper tabs
+- Print assumptions:
+  - FDM printing
+  - Flat bottom for bed contact
+  - Rounded edges for handling comfort
+  - Lead-in relief at the upper mouth for easier insertion
+
+## 現在の仕様
+
+- 想定するメロドリップ本体寸法:
+  - 下部外径 `53 mm`
+  - 上部外径 `55 mm`
+  - 高さ `14 mm`
+- 保持の考え方:
+  - 内枠で位置決め
+  - スポークで外周リングへ接続
+  - 部分ストッパーで落下を防止
+- 造形前提:
+  - FDM 造形
+  - 底面フラット
+  - 手当たり改善の角丸め
+  - 差し込みやすさを上げる上口リードイン
+
+## Files
 
 - `melodrip_lift_partial_stoppers.scad`
-  - Adjustable support body for MeloDrip with partial anti-drop tabs.
-  - Tunable fit, bridge count, outer frame dimensions, and stopper placement.
+  - Main model and user-facing parameters.
+  - Self-contained single file except for `BOSL2/std.scad`.
 
-## メインモデル
+## 依存関係
 
-- `melodrip_lift_partial_stoppers.scad`
-  - メロドリップ本体を支えるリフト本体です。
-  - はめ合い、ブリッジ本数、外周寸法、ストッパー位置を調整できます。
+- `include <BOSL2/std.scad>` が必要です。
+- OpenSCAD 2 Web Playground: [openscad2](https://ochafik.com/openscad2/) では BOSL2 が利用可能です。
+- Playground 用にはローカル `lib/` を参照しない単一ファイル構成にしています。
 
-## Key parameters
+## Tuning order
 
-- `fit_clearance`
-  - Base fit clearance against the MeloDrip body.
-- `stopper_count`
-  - Number of localized stopper tabs.
-- `stopper_angle`
-  - Angular span of each stopper tab.
-- `stopper_depth`
-  - How far each stopper projects inward.
-- `stopper_phase`
-  - Rotational offset used to place the stopper tabs away from interference points.
+1. `fit_clearance`
+   - Basic fit against the real MeloDrip body.
+2. `stopper_phase`
+   - Rotates the partial stopper tabs away from interference points.
+3. `stopper_depth` and `stopper_angle`
+   - Controls retention strength versus insertion friction.
+4. `bridge_count` and `bridge_w`
+   - Adjusts rigidity and visual openness.
+5. `seat_lead_in_clearance` and `seat_lead_in_h`
+   - Fine-tunes ease of insertion at the mouth.
 
-## 主なパラメータ
+## 調整の順番
 
-- `fit_clearance`
-  - メロドリップ本体との基準クリアランスです。
-- `stopper_count`
-  - 部分ストッパーの個数です。
-- `stopper_angle`
-  - 各ストッパーが占める角度幅です。
-- `stopper_depth`
-  - ストッパーが内側へ張り出す量です。
-- `stopper_phase`
-  - 干渉を避けたい位置に合わせてストッパー全体を回転配置するための位相です。
+1. `fit_clearance`
+   - 実物メロドリップとの基本クリアランスを決めます。
+2. `stopper_phase`
+   - 干渉しやすい位置からストッパーを逃がします。
+3. `stopper_depth` と `stopper_angle`
+   - 保持力と差し込み抵抗のバランスを詰めます。
+4. `bridge_count` と `bridge_w`
+   - 剛性と抜け感を調整します。
+5. `seat_lead_in_clearance` と `seat_lead_in_h`
+   - 上口の入りやすさを微調整します。
 
-## Usage
+## Quality improvements in this version
 
-1. Open `melodrip_lift_partial_stoppers.scad` in OpenSCAD.
-2. Adjust the exposed parameters in the customizer or source.
-3. Preview with `F5`.
-4. Render/export with `F6` when the fit and stopper placement look correct.
+- Code structure reorganized inside a BOSL2-based single file for playground compatibility.
+- BOSL2-based 2D rounding for cleaner edge control.
+- Upper lead-in relief added to reduce snagging during insertion.
+- Minimum stopper angular gap enforced to avoid merged or over-dense tabs.
+- Adaptive curve quality via `$fa` / `$fs` instead of a fixed global `$fn`.
 
-## 使い方
+## この版での改善点
 
-1. OpenSCAD で `melodrip_lift_partial_stoppers.scad` を開きます。
-2. カスタマイザまたはソース上のパラメータを調整します。
-3. `F5` でプレビューします。
-4. はまり具合とストッパー位置が問題なければ `F6` でレンダリングして書き出します。
+- Playground でそのまま動くように、BOSL2 ベースの単一ファイルへ整理しました。
+- BOSL2 の `round2d()` を使って角丸め処理を整理しました。
+- 差し込み時の引っかかりを減らすため、上口にリードイン逃がしを追加しました。
+- ストッパー同士が詰まりすぎないよう、最小角度ギャップを導入しました。
+- 固定 `\$fn` ではなく `$fa` / `$fs` ベースにして、曲面品質を調整しやすくしました。
