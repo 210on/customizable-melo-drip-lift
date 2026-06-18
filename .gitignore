@@ -1,4 +1,6 @@
 .DS_Store
+__pycache__/
+*.pyc
 
 # OpenSCAD exports
 *.stl
@@ -8,10 +10,26 @@
 *.png
 
 # Nested projects managed in their own repositories
+210on-profile/
 custom-emoji-studio/
+handy-roast-logger/
 openscad-customizable-coffee-dripper/
 openscad-hybrid-brewer/
 openscad-paper-filter-cut-jig/
+kaffelogic-dir-app/
+voicevox_tools/
 
 # Local scratch concepts
 dripper_paper_rinse_support.scad
+asset1_scale_cover.scad
+interwoven_circular_v_pattern_svg_export.scad
+export_interwoven_v_svg.py
+
+# Local apps, previews, and generated experiments
+Kaffelogic Studio DIR.app/
+voicevox_output/
+kaffelogic-*.html
+kaffelogic-*.css
+kaffelogic-*.user.js
+kaffelogic-*.stylus.css
+kaffelogic-*.stylus-raw.css
